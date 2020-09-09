@@ -1,0 +1,67 @@
+#include<iostream>
+using namespace std;
+int minimumNumber(int n, string password) {
+    // Return the minimum number of characters to make the password strong
+    int count =0;
+    int a,b,c,d,len;
+    len=password.size();
+    a=b=c=d=0;
+    for(int i=0 ;i<len;i++)
+     {   char ch=password[i];
+         if(ch>=65 && ch<=91)
+         { 
+             if(!a)
+             count++;
+             a=1;
+         }
+         
+         else 
+         if(ch>=97 && ch<=123)
+         {
+             if(!b)
+            count++;
+            b=1;
+         }
+         else 
+         if( ch>=48 &&ch<=57)
+         {
+             if(!c)
+             count++;
+             c=1;
+         }       
+         else if(!d)
+         {
+        count++;
+        d=1;
+         }
+
+     }
+     // ** the no of character required for strong password(speacial,digit,upper,lower) in them
+     int k=4-count;
+     if (len>6)
+     return k;
+     else if(len + k<6)
+           return 6-len ;
+      else return k;     
+
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    int n;
+    cin >> n;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    string password;
+    getline(cin, password);
+
+    int answer = minimumNumber(n, password);
+
+    fout << answer << "\n";
+
+    fout.close();
+
+    return 0;
+}
